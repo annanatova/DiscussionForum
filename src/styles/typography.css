@@ -1,0 +1,85 @@
+html {
+    font: 16px/1.6 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #4a2c2a;
+    background-color: #fff0f5;
+}
+
+body, form, input, textarea, option, select, button {
+    font: inherit;
+    color: inherit;
+}
+
+ul, ol {
+    padding-left: 2.5em;
+    padding-bottom: 1.5em;
+    color: #5a3c3a;
+}
+
+blockquote, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Georgia', serif;
+    color: #6b4142;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.8em;
+    color: #8b4f56;
+}
+
+h2 {
+    font-size: 2.2em;
+    color: #7a4650;
+}
+
+h3 {
+    font-size: 1.8em;
+    color: #6d4048;
+}
+
+h4 {
+    font-size: 1.5em;
+}
+
+h5 {
+    font-size: 1.3em;
+}
+
+h6 {
+    font-size: 1em;
+    font-style: italic;
+}
+
+p + h1, p + h2, p + h3, p + h4, p + h5, p + h6 {
+    padding-top: 0.5em;
+}
+
+blockquote {
+    padding: 0 2.5em;
+    border-left: 4px solid #d48ca3;
+    font-style: italic;
+    color: #7a4b52;
+    margin-bottom: 1.5em;
+    background-color: #ffe8ed;
+    border-radius: 4px;
+}
+
+blockquote p + p {
+    padding-top: 1.5em;
+}
+
+blockquote p:last-child {
+    padding-bottom: 0;
+}
+
+blockquote p.author {
+    text-align: right;
+    font-weight: 600;
+    font-style: normal;
+    color: #a35c65;
+}
