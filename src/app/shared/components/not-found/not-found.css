@@ -1,51 +1,56 @@
-.mainbox {
+.error-container {
     margin: auto;
     height: 600px;
     width: 600px;
     position: relative;
+    overflow: hidden;
 }
 
-.err, .err1, .err2 {
+.error-digit, .error-digit-one, .error-digit-two {
     color: #d81b60;
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 11rem;
+    font-size: 10rem;
+    line-height: 1;
     position: absolute;
     top: 8%;
     text-shadow: 2px 2px 8px rgba(216, 27, 96, 0.7);
+    white-space: nowrap;
 }
 
-.err {
-    left: 20%;
+.error-digit {
+    left: 18%;
 }
 
-.err1 {
-    left: 44%;
+.error-digit-one {
+    left: 43%;
 }
 
-.err2 {
+.error-digit-two {
     left: 68%;
 }
 
-.msg {
+.message-box {
     text-align: center;
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+    line-height: 1.2;
     position: absolute;
     left: 16%;
     top: 45%;
-    width: 75%;
+    width: 70%;
     color: #d81b60;
     text-shadow: 1px 1px 5px rgba(216, 27, 96, 0.6);
+    word-wrap: break-word;
 }
 
-.msg a {
+.message-box a {
     text-decoration: none;
     color: #d81b60;
     font-weight: bold;
     transition: color 0.3s ease;
 }
 
-.msg a:hover {
+.message-box a:hover {
     text-decoration: underline;
     color: #880e4f;
 }

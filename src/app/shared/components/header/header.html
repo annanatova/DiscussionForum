@@ -1,42 +1,29 @@
 <header>
-    <div class="mini-navbar-wrap">
-        <div class="logo-wrap">
-            <img src="chat.webp">
-            <p class="logo"> Discussion Forum</p>
-        </div>
-        <div class="mini-navbar">
-            <ul>
-                @if (isLoggedIn()) {
-                <li>
-                    <a routerLink="/profile">{{ currentUser()?.username }}'s profile</a>
-                </li>
-                <li>
-                    <a href="#" (click)="logout()">Logout</a>
-                </li>
-                } @else {
-                <li>
-                    <a routerLink="/login">Login</a>
-                </li>
-                <li>
-                    <a routerLink="/register">Register</a>
-                </li>
-                }
-            </ul>
-        </div>
+  <div class="mini-navbar-wrap">
+    <div class="logo-wrap">
+      <img src="chat.webp" alt="Logo">
+      <p class="logo">Discussion Forum</p>
     </div>
-    <nav>
-        <ul>
-            <li>
-                <a routerLink="/home">Home</a>
-            </li>
-            <li>
-                <a routerLink="/themes">Themes</a>
-            </li>
-            @if (isLoggedIn()) {
-            <li>
-                <a routerLink="/add-theme">New Theme</a>
-            </li>
-            }
-        </ul>
+    <nav class="mini-navbar">
+      <ul>
+        @if (isLoggedIn()) {
+        <li><a routerLink="/profile">{{ currentUser()?.username }}'s profile</a></li>
+        <li><a href="#" (click)="logout()">Logout</a></li>
+        } @else {
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/register">Register</a></li>
+        }
+      </ul>
     </nav>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a routerLink="/home">Home</a></li>
+      <li><a routerLink="/themes">Themes</a></li>
+      @if (isLoggedIn()) {
+      <li><a routerLink="/add-theme">New Theme</a></li>
+      }
+    </ul>
+  </nav>
 </header>

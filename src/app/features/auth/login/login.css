@@ -1,102 +1,103 @@
 .login {
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 2rem;
-    border: 1px solid #d81b60;
-    border-radius: 12px;
-    background: #fff0f5;
-    box-shadow: 0 4px 10px rgba(136, 14, 79, 0.2);
-    font-family: 'Nunito Sans', sans-serif;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #d81b60;
+  border-radius: 12px;
+  background: #fff0f5;
+  box-shadow: 0 4px 10px rgba(136, 14, 79, 0.2);
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 .login fieldset {
-    border: none;
-    padding: 0;
+  border: none;
+  padding: 0;
 }
 
-.login h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #880e4f;
-    font-weight: 900;
-    font-size: 1.8rem;
-    border-bottom: 2px solid #d81b60;
-    padding-bottom: 0.5rem;
+.login-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #880e4f;
+  font-weight: 900;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #d81b60;
+  padding-bottom: 0.5rem;
 }
 
 .field {
-    position: relative;
-    margin-bottom: 1.5rem;
+  position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .field-icon {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .field-icon label {
-    position: absolute;
-    left: 1rem;
-    color: #880e4f;
+  position: absolute;
+  left: 1rem;
+  color: #880e4f;
 }
 
 .field-icon input {
-    width: 100%;
-    padding: 0.75rem 1rem 0.75rem 3rem;
-    border: 1px solid #d81b60;
-    border-radius: 6px;
-    font-size: 1rem;
-    background-color: #fff;
-    color: #4a1a2a;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 1px solid #d81b60;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #4a1a2a;
+  transition: border-color 0.3s ease;
 }
 
 .field-icon input:focus {
-    border-color: #880e4f;
-    outline: none;
+  border-color: #880e4f;
+  outline: none;
 }
 
 .input-error {
-    border-color: #dc3545 !important;
+  border-color: #dc3545 !important;
 }
 
 .error {
-    color: #c62828;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+  color: #c62828;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
 
 button {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: #d81b60;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #d81b60;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:disabled {
-    background-color: #c48b9f;
-    cursor: not-allowed;
+  background-color: #c48b9f;
+  cursor: not-allowed;
 }
 
 button:hover:not(:disabled) {
-    background-color: #ad1457;
-    box-shadow: 0 0 10px rgba(136, 14, 79, 0.3);
+  background-color: #ad1457;
+  box-shadow: 0 0 10px rgba(136, 14, 79, 0.3);
 }
 
 .text-center {
-    text-align: center;
-    margin: 0;
+  text-align: center;
+  margin: 0;
 }
 
 .text-center a {
-    color: #880e4f;
+    color: #ff51ae;
     text-decoration: none;
     font-weight: 600;
 }

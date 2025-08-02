@@ -1,71 +1,113 @@
-<form class="register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <fieldset>
-    <h2>Registration</h2>
+<form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <fieldset class="register-fieldset">
+    <h2 class="register-title">Registration</h2>
 
     <!-- username -->
-    <p class="field field-icon">
-      <label for="username"><span><i class="fas fa-user"></i></span></label>
-      <input [class.input-error]="isUsernameValid" type="text" id="username" placeholder="Johny"
-        formControlName="username">
-    </p>
-    @if (isUsernameValid) {
-    <p class="error">
-      {{ usernameErrorMessage }}
-    </p>
-    }
+    <section class="form-group">
+      <label for="username" class="form-label">
+        <i class="fas fa-user form-icon"></i>
+        <input 
+          [class.input-error]="isUsernameValid" 
+          type="text" 
+          id="username" 
+          placeholder="Johny"
+          formControlName="username"
+          class="form-input"
+        >
+      </label>
+      @if (isUsernameValid) {
+      <small class="error-message">
+        {{ usernameErrorMessage }}
+      </small>
+      }
+    </section>
 
     <!-- email -->
-    <p class="field field-icon">
-      <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-      <input [class.input-error]="isEmailValid" type="email" id="email" placeholder="john.doe@gmail.com"
-        formControlName="email">
-    </p>
-    @if (isEmailValid) {
-    <p class="error">
-      {{ emailErrorMessage }}
-    </p>
-    }
+    <section class="form-group">
+      <label for="email" class="form-label">
+        <i class="fas fa-envelope form-icon"></i>
+        <input 
+          [class.input-error]="isEmailValid" 
+          type="email" 
+          id="email" 
+          placeholder="john.doe@gmail.com"
+          formControlName="email"
+          class="form-input"
+        >
+      </label>
+      @if (isEmailValid) {
+      <small class="error-message">
+        {{ emailErrorMessage }}
+      </small>
+      }
+    </section>
 
     <!-- telephone -->
-    <p class="field field-icon">
-      <label for="tel"><span><i class="fas fa-phone"></i></span></label>
-      <select name="select-tel" id="select-tel" class="tel">
-        <option value="00359">+359</option>
-      </select>
-      <input type="text" id="tel" placeholder="885 888 888" formControlName="phone">
-    </p>
+    <section class="form-group tel-group">
+      <label for="tel" class="form-label">
+        <i class="fas fa-phone form-icon"></i>
+        <select id="select-tel" class="form-select">
+          <option value="00359">+359</option>
+        </select>
+        <input 
+          type="text" 
+          id="tel" 
+          placeholder="885 888 888" 
+          formControlName="phone"
+          class="form-input tel-input"
+        >
+      </label>
+    </section>
 
-    <div formGroupName="passwords">
+    <section formGroupName="passwords" class="passwords-group">
+
       <!-- password -->
-      <p class="field field-icon">
-        <label for="password"><span><i class="fas fa-lock"></i></span></label>
-        <input [class.input-error]="isPasswordsValid" type="password" id="password" placeholder="******"
-          formControlName="password">
-      </p>
-      @if (isPasswordsValid) {
-      <p class="error">
-        {{ passwordErrorMessage }}
-      </p>
-      }
+      <section class="form-group">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock form-icon"></i>
+          <input 
+            [class.input-error]="isPasswordsValid" 
+            type="password" 
+            id="password" 
+            placeholder="******"
+            formControlName="password"
+            class="form-input"
+          >
+        </label>
+        @if (isPasswordsValid) {
+        <small class="error-message">
+          {{ passwordErrorMessage }}
+        </small>
+        }
+      </section>
 
       <!-- rePassword -->
-      <p class="field field-icon">
-        <label for="rePassword"><span><i class="fas fa-redo"></i></span></label>
-        <input [class.input-error]="isPasswordsValid" type="password" id="rePassword" placeholder="******"
-          formControlName="rePassword">
-      </p>
-      @if (isPasswordsValid) {
-      <p class="error">
-        {{ rePasswordErrorMessage }}
-      </p>
-      }
-    </div>
+      <section class="form-group">
+        <label for="rePassword" class="form-label">
+          <i class="fas fa-redo form-icon"></i>
+          <input 
+            [class.input-error]="isPasswordsValid" 
+            type="password" 
+            id="rePassword" 
+            placeholder="******"
+            formControlName="rePassword"
+            class="form-input"
+          >
+        </label>
+        @if (isPasswordsValid) {
+        <small class="error-message">
+          {{ rePasswordErrorMessage }}
+        </small>
+        }
+      </section>
 
-    <button [disabled]="registerForm.invalid">Create Account</button>
+    </section>
+
+    <button [disabled]="registerForm.invalid" class="register-button">Create Account</button>
 
     <p class="text-center">
       You already have an account?
-      <a routerLink="/login">Log In.</a>
+      <a routerLink="/login" class="text-link">Log In.</a>
     </p>
   </fieldset>
 </form>

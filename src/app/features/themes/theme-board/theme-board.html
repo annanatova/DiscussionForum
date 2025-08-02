@@ -1,48 +1,48 @@
 @if (!isLoggedIn()) {
-<div class="welcome">
-    <h3>Welcome to a Place of Ideas and Connection!</h3>
-    <p>Here, your voice matters. Ask questions, inspire others, and build something together. This community grows with you - one post at a time.</p>
-    <div class="logged">
-        <ul>
-            <li>
-                <a routerLink="/login">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Login
-                </a>
-            </li>
-            <li>
-                <a routerLink="/register">
-                    <i class="fas fa-user-plus"></i>
-                    Register
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+<section class="welcome-section">
+  <h3>Welcome to a Place of Ideas and Connection!</h3>
+  <p>
+    Here, your voice matters. Ask questions, inspire others, and build something together. This community grows with you - one post at a time.
+  </p>
+  <nav class="auth-links">
+    <ul>
+      <li>
+        <a routerLink="/login">
+          <i class="fas fa-sign-in-alt"></i>
+          Login
+        </a>
+      </li>
+      <li>
+        <a routerLink="/register">
+          <i class="fas fa-user-plus"></i>
+          Register
+        </a>
+      </li>
+    </ul>
+  </nav>
+</section>
 }
 
-<div class="container">
-    <main>
-        <div class="theme-title">
-            @for (theme of themes$ | async; track theme.id) {
-            <app-theme-item [theme]="theme"></app-theme-item>
-            }
-        </div>
-    </main>
+<div class="main-container">
+  <main class="themes-list">
+    <section class="theme-items">
+      @for (theme of themes$ | async; track theme.id) {
+        <app-theme-item [theme]="theme"></app-theme-item>
+      }
+    </section>
+  </main>
 
-    <aside>
-        <div class="aside">
-            <h2 class="title">
-                Recent posts
-            </h2>
-            <div>
-                @for (post of posts$ | async; track post.id) {
-                    <app-post-item [post]="post"></app-post-item>
-                }
-                @empty {
-                <p>Loading elements...</p>
-                }
-            </div>
-        </div>
-    </aside>
+  <aside class="sidebar">
+    <section class="recent-posts">
+      <h2 class="section-title">Recent posts</h2>
+      <div>
+        @for (post of posts$ | async; track post.id) {
+          <app-post-item [post]="post"></app-post-item>
+        }
+        @empty {
+          <p>Loading elements...</p>
+        }
+      </div>
+    </section>
+  </aside>
 </div>

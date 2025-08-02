@@ -3,11 +3,16 @@
 @import url('./styles/typography.css');
 @import url('./styles/responsive.css');
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     max-width: 1366px;
     margin: auto;
     position: relative;
     min-height: 100vh;
+    padding-bottom: 10vh;
     font-optical-sizing: auto;
     background-color: #fce4ec;
     color: #4a1a2a;
@@ -18,6 +23,7 @@ body {
     margin: auto;
     padding-bottom: 4.5em;
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-evenly;
 }
@@ -142,6 +148,7 @@ header a {
 
 main {
     width: 50%;
+    padding-bottom: 2em;
 }
 
 .theme-container a {
@@ -154,7 +161,8 @@ main {
     color: #880e4f;
 }
 
-.theme-container h2, p {
+.theme-container h2,
+.theme-container p {
     padding: 0.3em 0 0.2em;
     margin: 0;
 }
@@ -175,6 +183,7 @@ main {
     border-radius: 0.3em;
     font-size: 0.8em;
     margin-top: 1em;
+    margin-bottom: 1em;
     background-color: #d81b60d7;
 }
 

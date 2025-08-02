@@ -1,54 +1,65 @@
-<div class="profile">
-    <img src="profile.webp" alt="default user">
-    <h3>User Info:</h3>
+<section class="profile-section">
+  <img src="profile.webp" alt="default user" class="profile-avatar">
+  <h3 class="profile-title">User Info:</h3>
 
-    @if(!isEditMode) {
-    <div class="flex">
-        <p>Username: </p>
-        <p>{{ currentUser()?.username || 'N/A' }}</p>
+  @if(!isEditMode) {
+  <dl class="profile-info-list">
+    <div class="profile-info-item">
+      <dt class="profile-info-label">Username:</dt>
+      <dd class="profile-info-value">{{ currentUser()?.username || 'N/A' }}</dd>
     </div>
-    <div class="flex">
-        <p>Email: </p>
-        <p>{{ currentUser()?.email }}</p>
+    <div class="profile-info-item">
+      <dt class="profile-info-label">Email:</dt>
+      <dd class="profile-info-value">{{ currentUser()?.email }}</dd>
     </div>
-    <div class="flex">
-        <p>Phone: </p>
-        <p>{{ currentUser()?.phone }}</p>
+    <div class="profile-info-item">
+      <dt class="profile-info-label">Phone:</dt>
+      <dd class="profile-info-value">{{ currentUser()?.phone }}</dd>
     </div>
-    <button class="edit-button" (click)="onEdit()">Edit</button>
-    } @else {
-    <form [formGroup]="profileForm" (ngSubmit)="onSave()">
-        <div class="flex">
-            <p>Username: </p>
-            <div class="input-container">
-                <input [class.input-error]="isUsernameValid" type="text" id="username" formControlName="username">
-                @if (isUsernameValid) {
-                <p class="error">{{ usernameErrorMessage }}
-                <p>
-                    }
-            </div>
-        </div>
-        <div class="flex">
-            <p>Email: </p>
-            <div class="input-container">
-                <input [class.input-error]="isEmailValid" type="email" id="email" formControlName="email">
-                @if (isEmailValid) {
-                <p class="error">{{ emailErrorMessage }}
-                <p>
-                    }
-            </div>
-
-        </div>
-        <div class="flex">
-            <p>Phone: </p>
-            <div class="input-container">
-                <input type="text" id="tel" formControlName="phone">
-            </div>
-        </div>
-        <div class="button-container">
-            <button (click)="onCancel()" type="button" class="red-button">Cancel</button>
-            <button [disabled]="profileForm.invalid" type="submit" class="green-button">Save</button>
-        </div>
-    </form>
-    }
-</div>
+  </dl>
+  <button class="btn btn-edit" (click)="onEdit()">Edit</button>
+  } @else {
+  <form [formGroup]="profileForm" (ngSubmit)="onSave()" class="profile-form">
+    <div class="form-row">
+      <label for="username" class="form-label">Username:</label>
+      <div class="input-wrapper">
+        <input
+          [class.input-error]="isUsernameValid"
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-input"
+        >
+        @if (isUsernameValid) {
+        <p class="error-message">{{ usernameErrorMessage }}</p>
+        }
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="email" class="form-label">Email:</label>
+      <div class="input-wrapper">
+        <input
+          [class.input-error]="isEmailValid"
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-input"
+        >
+        @if (isEmailValid) {
+        <p class="error-message">{{ emailErrorMessage }}</p>
+        }
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="phone" class="form-label">Phone:</label>
+      <div class="input-wrapper">
+        <input type="text" id="phone" formControlName="phone" class="form-input">
+      </div>
+    </div>
+    <div class="form-buttons">
+      <button type="button" class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-save" [disabled]="profileForm.invalid">Save</button>
+    </div>
+  </form>
+  }
+</section>

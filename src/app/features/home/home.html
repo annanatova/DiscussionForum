@@ -1,11 +1,11 @@
-<div class="welcome">
+<section class="welcome-section">
   <h3>Welcome to a Place of Ideas and Connection!</h3>
- <p>
-Here, your voice matters. Ask questions, inspire others, and build something together. This community grows with you - one post at a time.
-</p>
+  <p>
+    Here, your voice matters. Ask questions, inspire others, and build something together. This community grows with you - one post at a time.
+  </p>
 
   @if (!isLoggedIn()) {
-  <div class="logged">
+  <nav class="auth-navigation">
     <ul>
       <li>
         <a routerLink="/login">
@@ -20,10 +20,10 @@ Here, your voice matters. Ask questions, inspire others, and build something tog
         </a>
       </li>
     </ul>
-  </div>
+  </nav>
   } @else {
-  <div class="logged">
+  <article class="user-welcome">
     <p>Welcome back, {{ currentUser()?.username }}!</p>
-  </div>
+  </article>
   }
-</div>
+</section>

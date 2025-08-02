@@ -1,31 +1,52 @@
-<div class="new-theme-border">
-    <div class="header-background">
-        <span>New Theme</span>
+<section class="theme-container">
+  <header class="theme-header">
+    <h2>New Theme</h2>
+  </header>
+
+  <form (ngSubmit)="onSubmit()" class="theme-form">
+    <div class="form-group">
+      <label for="themeName">
+        Title <span class="required">*</span>
+      </label>
+      <input
+        [class.input-error]="titleError"
+        type="text"
+        name="themeName"
+        id="themeName"
+        [(ngModel)]="themeName"
+        (blur)="validateTitle()"
+        class="form-control"
+      />
+      @if (titleError) {
+      <p class="error-message">
+        {{ titleErrorMessage }}
+      </p>
+      }
     </div>
-    <form (ngSubmit)="onSubmit()">
-        <div class="new-theme-title">
-            <label for="themeName">Title <span class="red">*</span></label>
-            <input [class.input-error]="titleError" type="text" name="themeName" id="themeName" [(ngModel)]="themeName"
-                (blur)="validateTitle()">
-            @if (titleError) {
-            <p class="error">
-                {{ titleErrorMessage }}
-            </p>
-            }
-        </div>
-        <div class="new-theme-content">
-            <label for="postText">Post <span class="red">*</span></label>
-            <textarea [class.input-error]="contentError" type="text" name="postText" id="postText" rows="8"
-                class="height" [(ngModel)]="postText" (blur)="validateContent()"></textarea>
-            @if (contentError) {
-            <p class="error">
-                {{ contentErrorMessage }}
-            </p>
-            }
-        </div>
-        <div class="new-theme-buttons">
-            <button type="button" class="cancel" (click)="onCancel()">Cancel</button>
-            <button type="submit" class="public" [disabled]="!isFormValid()">Post</button>
-        </div>
-    </form>
-</div>
+
+    <div class="form-group">
+      <label for="postText">
+        Post <span class="required">*</span>
+      </label>
+      <textarea
+        [class.input-error]="contentError"
+        name="postText"
+        id="postText"
+        rows="8"
+        [(ngModel)]="postText"
+        (blur)="validateContent()"
+        class="form-control textarea-control"
+      ></textarea>
+      @if (contentError) {
+      <p class="error-message">
+        {{ contentErrorMessage }}
+      </p>
+      }
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-cancel" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-submit" [disabled]="!isFormValid()">Post</button>
+    </div>
+  </form>
+</section>

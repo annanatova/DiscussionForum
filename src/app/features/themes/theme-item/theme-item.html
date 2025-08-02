@@ -1,27 +1,27 @@
-<div class="theme-container">
-  <div class="theme-name-wrapper">
-    <div class="theme-name">
-      <a href="#" class="normal">
-        <h2>{{ theme.themeName }}</h2>
+<section class="theme-wrapper">
+  <header class="theme-header">
+    <article class="theme-content">
+      <a href="#" class="theme-link">
+        <h2 class="theme-title">{{ theme.themeName }}</h2>
       </a>
-      <div class="columns">
-        <div>
-          <p>
+      <div class="theme-details">
+        <section>
+          <p class="theme-date">
             Date: <time>{{ theme.created_at }}</time>
           </p>
-          <div class="nick-name">
+          <div class="theme-user">
             <p>
               Username: <span>{{ theme.userId.username }}</span>
             </p>
           </div>
-        </div>
-        <div class="subscribers">
+        </section>
+        <aside class="theme-subscribers">
           <!-- <button class="subscribe">Subscribe</button> -->
           <p>
             Subscribers: <span>{{ theme.subscribers.length }}</span>
           </p>
-        </div>
+        </aside>
       </div>
-    </div>
-  </div>
-</div>
+    </article>
+  </header>
+</section>
