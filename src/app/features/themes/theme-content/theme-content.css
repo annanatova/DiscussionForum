@@ -7,7 +7,7 @@
 }
 
 .theme-title {
-    background: #fff0f5; /* много светло розово */
+    background: #fff0f5;
     border: 1px solid #d81b60;
     border-radius: 12px;
     padding: 1.5rem;
@@ -53,12 +53,12 @@
 }
 
 .subscribe {
-    background-color: #388e3c; /* наситено зелено */
+    background-color: #388e3c;
     color: white;
 }
 
 .unsubscribe {
-    background-color: #c62828; /* наситено червено */
+    background-color: #c62828;
     color: white;
 }
 
@@ -173,7 +173,7 @@
 
 .answer-comment p span {
     font-weight: 700;
-    color: #7e57c2; /* нежно лилаво */
+    color: #7e57c2;
 }
 
 .answer textarea {

@@ -17,7 +17,7 @@
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2rem;
-  color: #6d4c41; /* по-меки кафяви тонове за по-добър контраст */
+  color: #6d4c41;
 }
 
 .logged ul {
@@ -33,18 +33,17 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background-color: #7e57c2; /* меко лилаво */
-  color: white;
+  background-color: #7e57c2; 
   text-decoration: none;
-  border-radius: 1.5rem; /* по-заоблени ъгли */
+  border-radius: 1.5rem;
   font-weight: 600;
   transition: background-color 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(126, 87, 194, 0.3); /* лек сянка */
+  box-shadow: 0 4px 8px rgba(126, 87, 194, 0.3);
 }
 
 .logged li a:hover {
-  background-color: #5e35b1; /* по-тъмно лилаво при hover */
+  background-color: #5e35b1;
   box-shadow: 0 6px 12px rgba(94, 53, 177, 0.5);
 }
 
