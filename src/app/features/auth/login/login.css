@@ -2,9 +2,11 @@
     max-width: 400px;
     margin: 2rem auto;
     padding: 2rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: white;
+    border: 1px solid #d81b60;
+    border-radius: 12px;
+    background: #fff0f5; /* много светло розово */
+    box-shadow: 0 4px 10px rgba(136, 14, 79, 0.2);
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .login fieldset {
@@ -15,7 +17,11 @@
 .login h2 {
     text-align: center;
     margin-bottom: 2rem;
-    color: #333;
+    color: #880e4f;
+    font-weight: 900;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #d81b60;
+    padding-bottom: 0.5rem;
 }
 
 .field {
@@ -31,15 +37,23 @@
 .field-icon label {
     position: absolute;
     left: 1rem;
-    color: #666;
+    color: #880e4f;
 }
 
 .field-icon input {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 3rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #d81b60;
+    border-radius: 6px;
     font-size: 1rem;
+    background-color: #fff;
+    color: #4a1a2a;
+    transition: border-color 0.3s ease;
+}
+
+.field-icon input:focus {
+    border-color: #880e4f;
+    outline: none;
 }
 
 .input-error {
@@ -47,7 +61,7 @@
 }
 
 .error {
-    color: #dc3545;
+    color: #c62828;
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
@@ -55,22 +69,25 @@
 button {
     width: 100%;
     padding: 0.75rem;
-    background-color: #007bff;
+    background-color: #d81b60;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     margin-bottom: 1rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 button:disabled {
-    background-color: #6c757d;
+    background-color: #c48b9f;
     cursor: not-allowed;
 }
 
 button:hover:not(:disabled) {
-    background-color: #0056b3;
+    background-color: #ad1457;
+    box-shadow: 0 0 10px rgba(136, 14, 79, 0.3);
 }
 
 .text-center {
@@ -79,10 +96,12 @@ button:hover:not(:disabled) {
 }
 
 .text-center a {
-    color: #007bff;
+    color: #880e4f;
     text-decoration: none;
+    font-weight: 600;
 }
 
 .text-center a:hover {
     text-decoration: underline;
+    color: #d81b60;
 }

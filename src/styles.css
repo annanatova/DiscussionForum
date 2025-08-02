@@ -9,8 +9,8 @@ body {
     position: relative;
     min-height: 100vh;
     font-optical-sizing: auto;
-    background-color: #fce4ec; /* наситено светло розово */
-    color: #4a1a2a; /* по-тъмен, наситен бордо */
+    background-color: #fce4ec;
+    color: #4a1a2a;
 }
 
 .container {
@@ -45,16 +45,14 @@ button {
 
 button:hover {
     cursor: pointer;
-    background-color: #e91e63; /* по-ярко циклама розово */
+    background-color: #e91e63;
     border-radius: 1px;
     box-shadow: 0 6px 12px rgba(233, 30, 99, 0.7);
-    color: #fffde7; /* много светъл, почти кремав - силен контраст */
+    color: #fffde7;
 }
 
-/* header  */
-
 header {
-    background: #880e4f; /* много наситено розово */
+    background: #880e4f;
     padding: 0.5em 0;
 }
 
@@ -123,8 +121,6 @@ header a {
     margin: auto;
 }
 
-/* mini-navbar */
-
 .mini-navbar ul {
     margin-bottom: 60px;
     margin-right: -50px;
@@ -144,13 +140,9 @@ header a {
     transform: scale(1.1);
 }
 
-/* main  */
-
 main {
     width: 50%;
 }
-
-/* theme list item */
 
 .theme-container a {
     text-decoration: none;
@@ -217,18 +209,16 @@ main {
 }
 
 .subscribe {
-    background-color: #388e3c; /* контрастно зелено */
+    background-color: #388e3c;
 }
 
 .unsubscribe {
-    background-color: #c62828; /* наситено червено */
+    background-color: #c62828;
 }
 
 time {
     font-weight: bold;
 }
-
-/* aside  */
 
 aside {
     width: 29%;
@@ -281,8 +271,6 @@ aside {
     text-decoration: none;
     color: inherit;
 }
-
-/* footer  */
 
 footer {
     display: flex;

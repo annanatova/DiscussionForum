@@ -5,30 +5,25 @@
     position: relative;
 }
 
-.err {
-    color: #ffffff;
+.err, .err1, .err2 {
+    color: #d81b60;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 11rem;
     position: absolute;
-    left: 20%;
     top: 8%;
+    text-shadow: 2px 2px 8px rgba(216, 27, 96, 0.7);
 }
 
-.far {
-    position: absolute;
-    font-size: 8.5rem;
-    left: 42%;
-    top: 15%;
-    color: #ffffff;
+.err {
+    left: 20%;
+}
+
+.err1 {
+    left: 44%;
 }
 
 .err2 {
-    color: #ffffff;
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 11rem;
-    position: absolute;
     left: 68%;
-    top: 8%;
 }
 
 .msg {
@@ -39,15 +34,18 @@
     left: 16%;
     top: 45%;
     width: 75%;
-    color: #ffffff;
+    color: #d81b60; /* наситено розово */
+    text-shadow: 1px 1px 5px rgba(216, 27, 96, 0.6);
 }
 
 .msg a {
     text-decoration: none;
-    color: #ffffff;
+    color: #d81b60;
     font-weight: bold;
+    transition: color 0.3s ease;
 }
 
 .msg a:hover {
     text-decoration: underline;
+    color: #880e4f;
 }

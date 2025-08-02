@@ -1,6 +1,6 @@
 <form class="register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <fieldset>
-    <h2>Registration Form</h2>
+    <h2>Registration</h2>
 
     <!-- username -->
     <p class="field field-icon">
@@ -50,7 +50,7 @@
 
       <!-- rePassword -->
       <p class="field field-icon">
-        <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
+        <label for="rePassword"><span><i class="fas fa-redo"></i></span></label>
         <input [class.input-error]="isPasswordsValid" type="password" id="rePassword" placeholder="******"
           formControlName="rePassword">
       </p>
@@ -64,8 +64,8 @@
     <button [disabled]="registerForm.invalid">Create Account</button>
 
     <p class="text-center">
-      Have an account?
-      <a routerLink="/login">Log In</a>
+      You already have an account?
+      <a routerLink="/login">Log In.</a>
     </p>
   </fieldset>
 </form>

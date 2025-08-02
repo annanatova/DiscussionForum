@@ -1,124 +1,139 @@
-  .register {
-        width: 40%;
-        margin: 2em auto 0;
-        text-align: center;
-        background-color: #e4e3e3;
-        border-radius: 1em;
-        padding: 1em;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
+.register {
+    width: 40%;
+    margin: 2em auto 0;
+    text-align: center;
+    background-color: #fff0f5; /* светло розово */
+    border-radius: 1em;
+    padding: 2em;
+    box-shadow: 0 4px 10px rgba(136, 14, 79, 0.15);
+    font-family: 'Nunito Sans', sans-serif;
+}
 
-    .register fieldset {
-        border-radius: 0.5em;
-        padding: 1em;
-        background-color: #ffffff;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border: none;
-    }
+.register fieldset {
+    border-top: 3px solid #d81b60;   /* горна дебела черта */
+    border-bottom: 3px solid #d81b60; /* долна дебела черта */
+    border-left: 1px solid #d81b60;
+    border-right: 1px solid #d81b60;
+    border-radius: 1em;
+    padding: 0;
+    overflow: hidden; /* заобляне на краищата */
+    background: #fff0f5;
+    box-shadow: 0 4px 8px rgba(136, 14, 79, 0.1);
+}
 
-    .register h2 {
-        padding-top: 0;
-        border-bottom: none;
-        color: #234465;
-        font-size: 1.8em;
-        margin-bottom: 2rem;
-    }
+.register h2 {
+    color: #880e4f;
+    font-size: 1.8em;
+    margin-bottom: 2rem;
+    font-weight: 900;
+    border-bottom: 2px solid #d81b60;
+    padding-bottom: 0.5rem;
+}
 
-    .register p {
-        padding-bottom: 0;
-        padding-top: 1.5rem;
-        color: #333;
-    }
+.register p {
+    padding-top: 1.5rem;
+    color: #4a1a2a;
+    font-size: 1rem;
+}
 
-    .register input,
-    .register select {
-        flex: 0 1 100%;
-        border: 1px solid #999;
-        padding: 0.4em;
-        border-left: 0.4em solid green;
-        border-top-right-radius: 0.5em;
-        border-bottom-right-radius: 0.5em;
-        font-size: 1em;
-    }
+.register .field {
+    margin: 0;
+    border-bottom: 1px solid #d81b60;
+    padding: 0.75em 1em;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
 
-    .register select {
-        border-color: #333;
-        padding: 0.3em;
-        border-radius: 0.3em;
-    }
+.register .field:last-child {
+    border-bottom: none;
+}
 
-    .register button {
-        background-color: #234465;
-        color: white;
-        border: none;
-        border-radius: 0.5em;
-        padding: 0.7em 1.5em;
-        margin-top: 1.5rem;
-        width: 60%;
-        outline: none;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
+.register input,
+.register select {
+    border: none;
+    outline: none;
+    font-size: 1em;
+    flex-grow: 1;
+    padding: 0.5em 0.75em;
+    color: #4a1a2a;
+    background: transparent;
+    font-family: 'Nunito Sans', sans-serif;
+}
 
-    .register button:hover:not(:disabled) {
-        transform: scale(1.05);
-    }
+.register i {
+    padding-right: 0.75em;
+    color: #d81b60;
+    min-width: 1.5em;
+    text-align: center;
+    font-size: 1.2em;
+}
 
-    .register button:disabled {
-        background-color: #6c757d;
-        cursor: not-allowed;
-        transform: none;
-    }
+.register input:focus,
+.register select:focus {
+    background-color: #fff0f5;
+}
 
-    .register i {
-        border: 1px solid #999;
-        border-right: none;
-        padding: 0.55em;
-        border-top-left-radius: 0.5em;
-        border-bottom-left-radius: 0.5em;
-        background-color: #e9ecef;
-    }
+.register button {
+    margin-top: 1.5rem;
+    width: 60%;
+    border-radius: 1em;
+    padding: 0.75em 1.25em;
+    font-weight: 700;
+    font-size: 1.1rem;
+    background-color: #d81b60;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 6px rgba(136, 14, 79, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    .register a {
-        color: #234465;
-        text-decoration: none;
-    }
+.register button:hover:not(:disabled) {
+    background-color: #ad1457;
+    transform: scale(1.05);
+}
 
-    .register a:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
+.register button:disabled {
+    background-color: #c48b9f;
+    cursor: not-allowed;
+    transform: none;
+}
 
-    .register .tel {
-        padding-right: 0.8em;
-    }
+.register a {
+    color: #880e4f;
+    text-decoration: none;
+    font-weight: 600;
+}
 
-    .register .field {
-        display: flex;
-        padding-bottom: 0.5em;
-        align-items: center;
-    }
+.register a:hover {
+    text-decoration: underline;
+    color: #d81b60;
+}
 
-    .register .field input {
-        margin-left: 0.5em;
-    }
+.register .tel {
+    padding-right: 0.8em;
+}
 
-    .error {
-        text-align: left;
-        border-radius: 0.5em;
-        color: red;
-        padding-top: 0;
-        font-weight: bold;
-        font-size: 0.875rem;
-        margin-top: 0.25rem;
-    }
+.error {
+    text-align: left;
+    border-radius: 0.5em;
+    color: #c62828;
+    padding-top: 0;
+    font-weight: bold;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
 
-    .input-error {
-        border-left-color: red !important;
-        border-color: red;
-    }
+.input-error {
+    border-left-color: #c62828 !important;
+    border-color: #c62828 !important;
+}
 
-    .text-center {
-        text-align: center;
-        margin: 0;
-    }
+.text-center {
+    text-align: center;
+    margin: 0;
+}

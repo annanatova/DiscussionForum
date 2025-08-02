@@ -2,19 +2,22 @@
   text-align: center;
   padding: 2rem;
   margin-bottom: 2rem;
+  font-family: 'Nunito Sans', sans-serif;
+  color: #4a1a2a;
 }
 
 .welcome h3 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: #880e4f;
+  font-weight: 700;
 }
 
 .welcome p {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2rem;
-  color: #666;
+  color: #6d4c41; /* по-меки кафяви тонове за по-добър контраст */
 }
 
 .logged ul {
@@ -30,15 +33,19 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background-color: #007bff;
+  background-color: #7e57c2; /* меко лилаво */
   color: white;
   text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  border-radius: 1.5rem; /* по-заоблени ъгли */
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(126, 87, 194, 0.3); /* лек сянка */
 }
 
 .logged li a:hover {
-  background-color: #0056b3;
+  background-color: #5e35b1; /* по-тъмно лилаво при hover */
+  box-shadow: 0 6px 12px rgba(94, 53, 177, 0.5);
 }
 
 .logged li a i {

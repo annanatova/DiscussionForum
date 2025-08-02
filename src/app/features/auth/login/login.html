@@ -1,9 +1,9 @@
 <form class="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <fieldset>
-        <h2>Login Form</h2>
+        <h2>Log into your account</h2>
 
         <p class="field field-icon">
-            <label for="email"><span><i class="fas fa-envelope"></i></span></label>
+            <label for="email"><span><i class="fas fa-user"></i></span></label>
             <input 
                 [class.input-error]="isEmailValid" 
                 type="email"
@@ -18,7 +18,7 @@
         }
 
         <p class="field field-icon">
-            <label for="password"><span><i class="fas fa-lock"></i></span></label>
+            <label for="password"><span><i class="fas fa-key"></i></span></label>
             <input 
                 [class.input-error]="isPasswordValid"
                 type="password"
@@ -35,8 +35,8 @@
         <button [disabled]="loginForm.invalid">Login</button>
 
         <p class="text-center">
-            Have an account?
-            <a routerLink="/register">Register</a>
+            You don't have an account?
+            <a routerLink="/register">Sign in.</a>
         </p>
     </fieldset>
 </form>
