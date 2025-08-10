@@ -24,11 +24,17 @@
 }
 
 <div class="main-container">
-  <main class="themes-list">
-    <section class="theme-items">
-      @for (theme of themes$ | async; track theme.id) {
-        <app-theme-item [theme]="theme"></app-theme-item>
-      }
+  <aside class="sidebar">
+    <section class="recent-posts">
+      <h2 class="section-title">Recent posts</h2>
+      <div>
+        @for (post of posts$ | async; track post.id) {
+          <app-post-item [post]="post"></app-post-item>
+        }
+        @empty {
+          <p>Loading elements...</p>
+        }
+      </div>
     </section>
-  </main>
+  </aside>
 </div>

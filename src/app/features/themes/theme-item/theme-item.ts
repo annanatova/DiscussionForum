@@ -7,15 +7,21 @@ import { SliceTitlePipe } from '../../../shared/pipes';
 
 @Component({
   selector: 'app-theme-item',
+  standalone: true,
   imports: [CommonModule, RouterLink, SliceTitlePipe],
   templateUrl: './theme-item.html',
-  styleUrl: './theme-item.css',
+  styleUrls: ['./theme-item.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ThemeItem {
   @Input() theme!: Theme;
 
   private authService = inject(AuthService);
+  subscribed = false;
+
+  ngOnInit() {
+    this.subscribed = this.isSubscribed(this.theme.id);
+  }
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -26,12 +32,20 @@ export class ThemeItem {
   }
 
   isSubscribed(themeId: string): boolean {
-    // For now, return false. In a real app, you'd check against user's subscriptions
-    return false;
+    return this.theme.subscribers.some(sub => sub === this.currentUserId);
   }
 
   toggleSubscribe(themeId: string): void {
-    // For now, just log the action. In a real app, you'd make an API call
-    console.log(`Toggling subscription for theme: ${themeId}`);
+    if (!this.isLoggedIn) return;
+
+    if (this.subscribed) {
+      const index = this.theme.subscribers.indexOf(this.currentUserId!);
+      if (index > -1) this.theme.subscribers.splice(index, 1);
+    } else {
+      this.theme.subscribers.push(this.currentUserId!);
+    }
+
+    this.subscribed = !this.subscribed;
+    console.log(`${this.subscribed ? 'Subscribed' : 'Unsubscribed'} to theme ${themeId}`);
   }
 }

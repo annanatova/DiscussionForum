@@ -24,6 +24,10 @@ export const routes: Routes = [
         path: 'themes',
         loadComponent: () => import('./features/themes/theme-board/theme-board').then(c => c.ThemeBoard)
     },
+       {
+        path: 'posts',
+        loadComponent: () => import('./features/posts/post-board/post-board').then(c => c.PostBoard)
+    },
     {
         path: 'themes/:id',
         component: ThemeContent
