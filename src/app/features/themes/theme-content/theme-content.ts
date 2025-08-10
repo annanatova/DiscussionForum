@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../core/services';
-import { Comment } from '../../../models/comment';
+import { Comment } from '../../../models';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

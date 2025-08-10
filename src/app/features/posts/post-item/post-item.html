@@ -2,6 +2,6 @@
   <a href="#">
     <h3 class="post-title">{{post.text}}</h3>
     <p class="post-author">{{post.userId.username}}</p>
-    <p class="post-date"><time>{{post.created_at}}</time></p>
+    <p class="post-date"><span>{{post.created_at | timeAgo }}</span></p>
   </a>
 </article>

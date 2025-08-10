@@ -7,11 +7,17 @@ import { Theme } from "../../models";
     providedIn: 'root' 
 })
 export class ThemesService {
-    private apiUrl = 'http://localhost:3000/api/themes';
-
+    private apiUrl = 'http://localhost:3000/api';
+    
     constructor(private httpClient: HttpClient) {}
 
     getThemes(): Observable<Theme[]> {
-        return this.httpClient.get<Theme[]>(this.apiUrl);
+        return this.httpClient.get<Theme[]>(`${this.apiUrl}/themes`);
+    }
+
+    createTheme(themeName: string, postText: string): Observable<Theme> {
+        return this.httpClient.post<Theme>(`${this.apiUrl}/themes`, { themeName, postText }, {
+            withCredentials: true,
+        });
     }
 }

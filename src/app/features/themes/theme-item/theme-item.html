@@ -2,12 +2,12 @@
   <header class="theme-header">
     <article class="theme-content">
       <a href="#" class="theme-link">
-        <h2 class="theme-title">{{ theme.themeName }}</h2>
+        <h2 class="theme-title">{{ theme.themeName | sliceTitle }}</h2>
       </a>
       <div class="theme-details">
         <section>
           <p class="theme-date">
-            Date: <time>{{ theme.created_at }}</time>
+            Date: <time>{{theme.created_at | date: 'dd.MM.yyyy HH:mm:ss'}}</time>
           </p>
           <div class="theme-user">
             <p>
@@ -16,7 +16,13 @@
           </div>
         </section>
         <aside class="theme-subscribers">
-          <!-- <button class="subscribe">Subscribe</button> -->
+          @if (isLoggedIn && theme.userId.id !== currentUserId) {
+                        @if (isSubscribed(theme.id)) {
+                            <button class="unsubscribe" (click)="toggleSubscribe(theme.id)">Unsubscribe</button>
+                        } @else {
+                            <button class="subscribe" (click)="toggleSubscribe(theme.id)">Subscribe</button>
+                        }
+                    }
           <p>
             Subscribers: <span>{{ theme.subscribers.length }}</span>
           </p>
