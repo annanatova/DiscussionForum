@@ -46,7 +46,6 @@ export class ThemeContent implements OnInit {
 
         this.comments = themeData.comments || [];
 
-        // След обновяване на стойности, казваме на Angular да рендерира пак
         this.cdr.detectChanges();
       });
     });
@@ -57,18 +56,17 @@ export class ThemeContent implements OnInit {
     if (!currentUser) return;
 
     if (this.isSubscribed) {
-      this.themesService.unsubscribe(this.themeId, currentUser.id).subscribe(() => {
-        this.isSubscribed = false;
-        this.subscribersCount--;
-        this.cdr.detectChanges();
-      });
+      // Отписване - намаляваме брояча и сменяме флага
+      this.subscribersCount = Math.max(0, this.subscribersCount - 1);
+      this.isSubscribed = false;
     } else {
-      this.themesService.subscribe(this.themeId, currentUser.id).subscribe(() => {
-        this.isSubscribed = true;
-        this.subscribersCount++;
-        this.cdr.detectChanges();
-      });
+      // Абониране - увеличаваме брояча и сменяме флага
+      this.subscribersCount++;
+      this.isSubscribed = true;
     }
+
+    this.cdr.detectChanges();
+    console.log(`${this.isSubscribed ? 'Subscribed' : 'Unsubscribed'} locally to theme ${this.themeId}`);
   }
 
   likeComment(commentId: string): void {
