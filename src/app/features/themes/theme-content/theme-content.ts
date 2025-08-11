@@ -1,95 +1,103 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../../core/services';
-import { Comment } from '../../../models';
-import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
+import { ThemesService } from '../../../core/services/themes.service';
+import { Comment } from '../../../models/comment';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-theme-content',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './theme-content.html',
   styleUrls: ['./theme-content.css']
 })
-export class ThemeContent {
+export class ThemeContent implements OnInit {
   private route = inject(ActivatedRoute);
+  private themesService = inject(ThemesService);
   protected authService = inject(AuthService);
+  private cdr = inject(ChangeDetectorRef);
 
-  themeTitle = 'Angular 18';
-  themeDate = '2024-10-10 12:08:28';
-  subscribersCount = 456;
+  themeId!: string;
+  themeTitle = '';
+  themeDate = '';
+  subscribersCount = 0;
   isSubscribed = false;
-  
+
+  comments: Comment[] = [];
+
   newComment = '';
   commentError = false;
 
-  // Mock comments data
-  comments: Comment[] = [
-    {
-      id: '1',
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure facere sint dolorem quam, accusantium ipsa veniam laudantium inventore aut, tenetur quibusdam doloribus. Incidunt odio nostrum facilis ipsum dolorem deserunt illum?',
-      author: 'David',
-      date: '2024-10-10 12:08:28',
-      likes: 5,
-      liked: false,
-      disliked: false
-    },
-    {
-      id: '2',
-      text: 'Lorem ipsum dolor sit amet consectetur',
-      author: 'Mark',
-      date: '2024-10-10 14:28:11',
-      likes: 3,
-      liked: false,
-      disliked: false
-    }
-  ];
-
   ngOnInit(): void {
-    // Get theme ID from route params
     this.route.params.subscribe(params => {
-      const themeId = params['themeId'];
-      console.log('Theme ID:', themeId);
-      // In a real app, you would fetch theme details and comments here
+      this.themeId = params['id'];
+
+      this.themesService.getThemeById(this.themeId).subscribe(themeData => {
+        this.themeTitle = themeData.themeName;
+        this.themeDate = new Date(themeData.created_at).toLocaleString();
+        this.subscribersCount = themeData.subscribers.length;
+
+        const currentUser = this.authService.currentUser();
+        this.isSubscribed = currentUser
+          ? themeData.subscribers.includes(currentUser.id)
+          : false;
+
+        this.comments = themeData.comments || [];
+
+        // След обновяване на стойности, казваме на Angular да рендерира пак
+        this.cdr.detectChanges();
+      });
     });
   }
 
   toggleSubscribe(): void {
-    this.isSubscribed = !this.isSubscribed;
+    const currentUser = this.authService.currentUser();
+    if (!currentUser) return;
+
     if (this.isSubscribed) {
-      this.subscribersCount++;
+      this.themesService.unsubscribe(this.themeId, currentUser.id).subscribe(() => {
+        this.isSubscribed = false;
+        this.subscribersCount--;
+        this.cdr.detectChanges();
+      });
     } else {
-      this.subscribersCount--;
+      this.themesService.subscribe(this.themeId, currentUser.id).subscribe(() => {
+        this.isSubscribed = true;
+        this.subscribersCount++;
+        this.cdr.detectChanges();
+      });
     }
   }
 
   likeComment(commentId: string): void {
     const comment = this.comments.find(c => c.id === commentId);
-    if (comment) {
-      if (comment.liked) {
-        comment.likes--;
-        comment.liked = false;
-      } else {
-        comment.likes++;
-        comment.liked = true;
-        if (comment.disliked) {
-          comment.disliked = false;
-        }
+    if (!comment) return;
+
+    if (comment.liked) {
+      comment.likes--;
+      comment.liked = false;
+    } else {
+      comment.likes++;
+      comment.liked = true;
+      if (comment.disliked) {
+        comment.disliked = false;
       }
     }
   }
 
   dislikeComment(commentId: string): void {
     const comment = this.comments.find(c => c.id === commentId);
-    if (comment) {
-      if (comment.disliked) {
-        comment.disliked = false;
-      } else {
-        comment.disliked = true;
-        if (comment.liked) {
-          comment.likes--;
-          comment.liked = false;
-        }
+    if (!comment) return;
+
+    if (comment.disliked) {
+      comment.disliked = false;
+    } else {
+      comment.disliked = true;
+      if (comment.liked) {
+        comment.likes--;
+        comment.liked = false;
       }
     }
   }
@@ -105,7 +113,7 @@ export class ThemeContent {
     }
 
     this.commentError = false;
-    
+
     const newComment: Comment = {
       id: Date.now().toString(),
       text: this.newComment,
@@ -118,5 +126,10 @@ export class ThemeContent {
 
     this.comments.unshift(newComment);
     this.newComment = '';
+    this.cdr.detectChanges();
+  }
+
+  trackByCommentId(index: number, comment: Comment): string {
+    return comment.id;
   }
 }

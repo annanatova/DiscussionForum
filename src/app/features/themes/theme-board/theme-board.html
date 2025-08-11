@@ -1,5 +1,4 @@
-@if (!isLoggedIn()) {
-<section class="welcome-section">
+<section class="welcome-section" *ngIf="!isLoggedIn()">
   <h3>Welcome to a Place of Ideas and Connection!</h3>
   <p>
     Here, your voice matters. Ask questions, inspire others, and build something together. This community grows with you - one post at a time.
@@ -21,14 +20,14 @@
     </ul>
   </nav>
 </section>
-}
 
 <div class="main-container">
   <main class="themes-list">
     <section class="theme-items">
-      @for (theme of themes$ | async; track theme.id) {
-        <app-theme-item [theme]="theme"></app-theme-item>
-      }
+      <app-theme-item 
+        *ngFor="let theme of themes$ | async; trackBy: trackByThemeId"
+        [theme]="theme">
+      </app-theme-item>
     </section>
   </main>
 </div>

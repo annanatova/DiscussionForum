@@ -30,8 +30,7 @@ export const routes: Routes = [
     },
     {
         path: 'themes/:id',
-        component: ThemeContent
-        // loadComponent: () => import('./features/themes/theme-content/theme-content').then(c => c.ThemeContent)
+        loadComponent: () => import('./features/themes/theme-content/theme-content').then(c => c.ThemeContent)
     },
     {
         path: 'add-theme',

@@ -1,4 +1,3 @@
-<p>theme-content works!</p>
 <div class="theme-content">
   <!-- Theme title and subscription -->
   <section class="theme-header">
@@ -9,62 +8,75 @@
       </div>
       <div class="subscribers">
         <p>Subscribers: <span>{{ subscribersCount }}</span></p>
-        @if (authService.isLoggedIn()) {
-          @if (isSubscribed) {
-            <button class="unsubscribe" (click)="toggleSubscribe()">Unsubscribe</button>
-          } @else {
+
+        <ng-container *ngIf="authService.isLoggedIn()">
+          <button *ngIf="isSubscribed; else subscribeBtn" class="unsubscribe" (click)="toggleSubscribe()">
+            Unsubscribe
+          </button>
+          <ng-template #subscribeBtn>
             <button class="subscribe" (click)="toggleSubscribe()">Subscribe</button>
-          }
-        }
+          </ng-template>
+        </ng-container>
       </div>
     </div>
   </section>
 
   <!-- Comments list -->
   <section class="comments-list">
-    @for (comment of comments; track comment.id) {
-      <article class="comment">
-        <header class="comment-header">
-          <p><span>{{ comment.author }}</span> posted on <time>{{ comment.date }}</time></p>
-        </header>
-        <div class="comment-main">
-          <div class="user-details">
-            <img src="profile.png" alt="avatar">
-          </div>
-          <div class="post-content">
-            <p>{{ comment.text }}</p>
-          </div>
+    <article class="comment" *ngFor="let comment of comments; trackBy: trackByCommentId">
+      <header class="comment-header">
+        <p><span>{{ comment.author }}</span> posted on <time>{{ comment.date }}</time></p>
+      </header>
+      <div class="comment-main">
+        <div class="user-details">
+          <img src="profile.webp" alt="avatar" />
         </div>
-        <footer class="comment-footer">
-          @if (authService.isLoggedIn()) {
-            <i class="fas fa-thumbs-up" (click)="likeComment(comment.id)" [class.liked]="comment.liked"></i>
-            <i class="fas fa-thumbs-down" (click)="dislikeComment(comment.id)" [class.disliked]="comment.disliked"></i>
-          }
-          <p><span>{{ comment.likes }}</span> likes</p>
-        </footer>
-      </article>
-    }
+        <div class="post-content">
+          <p>{{ comment.text }}</p>
+        </div>
+      </div>
+      <footer class="comment-footer">
+        <ng-container *ngIf="authService.isLoggedIn()">
+          <i
+            class="fas fa-thumbs-up"
+            (click)="likeComment(comment.id)"
+            [class.liked]="comment.liked"
+            style="cursor:pointer"
+            title="Like"
+          ></i>
+          <i
+            class="fas fa-thumbs-down"
+            (click)="dislikeComment(comment.id)"
+            [class.disliked]="comment.disliked"
+            style="cursor:pointer"
+            title="Dislike"
+          ></i>
+        </ng-container>
+        <p><span>{{ comment.likes }}</span> likes</p>
+      </footer>
+    </article>
   </section>
 
   <!-- Add new comment form -->
-  @if (authService.isLoggedIn()) {
-    <section class="add-comment">
-      <p><span>{{ authService.currentUser()?.username }}</span> comment:</p>
-      <form (ngSubmit)="addComment()">
-        <textarea 
-          name="postText" 
-          id="comment" 
-          cols="30" 
-          rows="10" 
-          [(ngModel)]="newComment"
-          placeholder="Write your comment here..." 
-          [class.input-error]="commentError">
-        </textarea>
-        @if (commentError) {
-          <p class="error">Comment is required and must be at least 10 characters long.</p>
-        }
-        <button type="submit" [disabled]="!isCommentValid()">Post</button>
-      </form>
-    </section>
-  }
+  <section class="add-comment" *ngIf="authService.isLoggedIn()">
+    <p><span>{{ authService.currentUser()?.username }}</span> comment:</p>
+    <form (ngSubmit)="addComment()">
+      <textarea
+        name="postText"
+        id="comment"
+        cols="30"
+        rows="10"
+        [(ngModel)]="newComment"
+        placeholder="Write your comment here..."
+        [class.input-error]="commentError"
+        required
+        minlength="10"
+        #commentInput="ngModel"
+      ></textarea>
+      <p class="error" *ngIf="commentError">
+        Comment is required and must be at least 10 characters long.
+      </p>
+      <button type="submit" [disabled]="!isCommentValid()">Post</button>
+    </form>
+  </section>
 </div>

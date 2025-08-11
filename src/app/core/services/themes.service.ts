@@ -20,4 +20,16 @@ export class ThemesService {
             withCredentials: true,
         });
     }
+
+    getThemeById(id: string): Observable<Theme> {
+        return this.httpClient.get<Theme>(`${this.apiUrl}/themes/${id}`);
+    }
+
+    subscribe(themeId: string, userId: string): Observable<void> {
+        return this.httpClient.post<void>(`${this.apiUrl}/themes/${themeId}/subscribe`,{ userId });
+    }
+
+    unsubscribe(themeId: string, userId: string): Observable<void> {
+        return this.httpClient.post<void>(`${this.apiUrl}/themes/${themeId}/unsubscribe`,{ userId });
+    }
 }

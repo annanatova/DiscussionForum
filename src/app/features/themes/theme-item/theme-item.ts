@@ -20,7 +20,7 @@ export class ThemeItem {
   subscribed = false;
 
   ngOnInit() {
-    this.subscribed = this.isSubscribed(this.theme.id);
+    this.subscribed = this.isSubscribed(this.theme._id);
   }
 
   get isLoggedIn(): boolean {
