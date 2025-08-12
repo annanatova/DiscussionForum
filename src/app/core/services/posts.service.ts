@@ -20,4 +20,12 @@ export class PostsService {
             withCredentials: true,
         });
     }
+
+    getPostById(id: string): Observable<Post> {
+            return this.httpClient.get<Post>(`${this.apiUrl}/posts/${id}`);
+        }
+
+    getAllPosts(): Observable<Post[]> {
+        return this.httpClient.get<Post[]>(`${this.apiUrl}/posts`);
+        }
 }

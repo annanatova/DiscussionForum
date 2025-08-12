@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { NotFound } from './shared/components/not-found/not-found';
-import { ThemeContent } from './features/themes';
+// import { ThemeContent } from './features/themes';
 
 export const routes: Routes = [
     {
@@ -27,6 +27,10 @@ export const routes: Routes = [
        {
         path: 'posts',
         loadComponent: () => import('./features/posts/post-board/post-board').then(c => c.PostBoard)
+    },
+      {
+        path: 'posts/:id',
+        loadComponent: () => import('./features/posts/post-content/post-content').then(c => c.PostContent)
     },
     {
         path: 'themes/:id',

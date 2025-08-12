@@ -1,7 +1,8 @@
 <article class="post-preview">
-  <a href="#">
-    <h3 class="post-title">{{post.text}}</h3>
-    <p class="post-author">{{post.userId.username}}</p>
-    <p class="post-date"><span>{{post.created_at | timeAgo }}</span></p>
-  </a>
+  <h3 class="post-title">{{ post.text }}</h3>
+  <p class="post-author">{{ post.userId.username }}</p>
+  <p class="post-date"><span>{{ post.created_at | timeAgo }}</span></p>
+
+  <!-- Angular routerLink води към поста -->
+ <button [routerLink]="['/posts', post._id]" class="details-btn">Details</button>
 </article>

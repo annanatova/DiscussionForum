@@ -22,4 +22,8 @@ export class PostBoard {
     private postsService: PostsService) {
     this.posts$ = this.postsService.getPosts();
   }
+
+  trackById(index: number, post: Post): string {
+  return post._id;
+}
 }
