@@ -32,4 +32,12 @@ export class ThemesService {
     unsubscribe(themeId: string, userId: string): Observable<void> {
         return this.httpClient.post<void>(`${this.apiUrl}/themes/${themeId}/unsubscribe`,{ userId });
     }
+
+    deleteTheme(themeId: string): Observable<any> {
+        return this.httpClient.delete(`${this.apiUrl}/themes/${themeId}`);
+    }
+
+   updateTheme(themeId: string, data: Partial<{ themeName: string }>): Observable<Theme> {
+  return this.httpClient.patch<Theme>(`${this.apiUrl}/themes/${themeId}`, data);
+}
 }

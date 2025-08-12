@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemesService } from '../../../core/services/themes.service';
 import { Comment } from '../../../models/comment';
@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ThemeContent implements OnInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private themesService = inject(ThemesService);
   protected authService = inject(AuthService);
   private cdr = inject(ChangeDetectorRef);
@@ -30,14 +31,24 @@ export class ThemeContent implements OnInit {
   newComment = '';
   commentError = false;
 
+  themeAuthorId = '';  // ще пазим id на автора
+
+  // За inline редакция на тема
+  isEditingTheme = false;
+  editedThemeName = '';
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.themeId = params['id'];
 
       this.themesService.getThemeById(this.themeId).subscribe(themeData => {
+        console.log('themeData.userId:', themeData.userId);
         this.themeTitle = themeData.themeName;
         this.themeDate = new Date(themeData.created_at).toLocaleString();
         this.subscribersCount = themeData.subscribers.length;
+
+        this.themeAuthorId = themeData.userId;  // Взимаме id на автора
+        this.editedThemeName = this.themeTitle;
 
         const currentUser = this.authService.currentUser();
         this.isSubscribed = currentUser
@@ -56,11 +67,9 @@ export class ThemeContent implements OnInit {
     if (!currentUser) return;
 
     if (this.isSubscribed) {
-      // Отписване - намаляваме брояча и сменяме флага
       this.subscribersCount = Math.max(0, this.subscribersCount - 1);
       this.isSubscribed = false;
     } else {
-      // Абониране - увеличаваме брояча и сменяме флага
       this.subscribersCount++;
       this.isSubscribed = true;
     }
@@ -129,5 +138,48 @@ export class ThemeContent implements OnInit {
 
   trackByCommentId(index: number, comment: Comment): string {
     return comment.id;
+  }
+
+  // Inline редакция на тема
+
+  startEditTheme(): void {
+  this.isEditingTheme = true;
+  this.editedThemeName = this.themeTitle;
+}
+
+cancelEditTheme(): void {
+  this.isEditingTheme = false;
+}
+
+saveTheme(): void {
+  const trimmedName = this.editedThemeName.trim();
+  if (!trimmedName) {
+    alert('Theme name cannot be empty');
+    return;
+  }
+
+  this.themesService.updateTheme(this.themeId, { themeName: trimmedName }).subscribe({
+    next: (updatedTheme: any) => {
+      this.themeTitle = updatedTheme.themeName;
+      this.isEditingTheme = false;
+      this.cdr.detectChanges();
+      console.log('Theme updated successfully');
+    },
+    error: (err) => {
+      console.error('Update failed', err);
+      alert('Failed to update theme. Please try again.');
+    }
+  });
+}
+
+  // Изтриване на тема
+
+  onDeleteTheme(): void {
+    if (!confirm('Are you sure you want to delete this theme?')) return;
+
+    this.themesService.deleteTheme(this.themeId).subscribe(() => {
+      console.log(`Theme ${this.themeId} deleted`);
+      this.router.navigate(['/themes']);
+    });
   }
 }

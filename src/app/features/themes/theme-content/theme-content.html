@@ -1,21 +1,51 @@
 <div class="theme-content">
+
+  <!-- <div style="background: #f8f8f8; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc;">
+  <p><b>Debug info:</b></p>
+  <p>Current user ID: <code>{{ authService.currentUser()?.id }}</code></p>
+  <p>Theme author ID: <code>{{ themeAuthorId }}</code></p>
+  <p>Logged in? <code>{{ authService.isLoggedIn() }}</code></p>
+</div> -->
+
   <!-- Theme title and subscription -->
   <section class="theme-header">
     <div class="theme-name-wrapper">
       <div class="theme-name">
-        <h2>{{ themeTitle }}</h2>
-        <p>Date: <time>{{ themeDate }}</time></p>
+        <!-- Inline редакция: ако не редактираме, показваме заглавието -->
+        <ng-container *ngIf="!isEditingTheme; else editForm">
+          <h2>{{ themeTitle }}</h2>
+          <p>Date: <time>{{ themeDate }}</time></p>
+        </ng-container>
+
+        <!-- Форма за редакция на заглавието -->
+        <ng-template #editForm>
+          <input
+            type="text"
+            [(ngModel)]="editedThemeName"
+            placeholder="Edit theme name"
+            maxlength="100"
+            autofocus
+          />
+          <button (click)="saveTheme()">Save</button>
+          <button (click)="cancelEditTheme()">Cancel</button>
+        </ng-template>
       </div>
       <div class="subscribers">
         <p>Subscribers: <span>{{ subscribersCount }}</span></p>
 
         <ng-container *ngIf="authService.isLoggedIn()">
-          <button *ngIf="isSubscribed; else subscribeBtn" class="unsubscribe" (click)="toggleSubscribe()">
-            Unsubscribe
-          </button>
-          <ng-template #subscribeBtn>
-            <button class="subscribe" (click)="toggleSubscribe()">Subscribe</button>
-          </ng-template>
+          <div class="actions-wrapper">
+            <button *ngIf="isSubscribed; else subscribeBtn" class="unsubscribe" (click)="toggleSubscribe()">
+              Unsubscribe
+            </button>
+            <ng-template #subscribeBtn>
+              <button class="subscribe" (click)="toggleSubscribe()">Subscribe</button>
+            </ng-template>
+            <div *ngIf="authService.currentUser()?.id === themeAuthorId && !isEditingTheme" class="edit-delete-buttons">
+              <button (click)="startEditTheme()">Edit Theme</button>
+              <button (click)="onDeleteTheme()">Delete Theme</button>
+            </div>
+          </div>
         </ng-container>
       </div>
     </div>
@@ -29,7 +59,7 @@
       </header>
       <div class="comment-main">
         <div class="user-details">
-          <img src="profile.webp" alt="default user" class="profile-avatar">
+          <img src="profile.webp" alt="default user" class="profile-avatar" />
         </div>
         <div class="post-content">
           <p>{{ comment.text }}</p>
