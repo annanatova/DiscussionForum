@@ -35,7 +35,6 @@
             <ng-template #subscribeBtn>
               <button class="subscribe" (click)="toggleSubscribe()">Subscribe</button>
             </ng-template>
-
             <div *ngIf="currentUserId === theme.userId && !isEditingTheme" class="edit-delete-buttons">
               <button (click)="startEditTheme()">Edit Theme</button>
               <button (click)="onDeleteTheme()">Delete Theme</button>
