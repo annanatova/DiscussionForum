@@ -40,14 +40,12 @@ ng serve
 Open your browser at http://localhost:4200
 
 ## Technologies
-- Frontend: Angular
-- Backend: REST API (Node.js / Express)
-- Database: MongoDB
-- Authentication: JWT (JSON Web Tokens)
-- Project Structure
-
+1. Frontend: Angular
+2. Backend: REST API (Node.js / Express)
+3. Database: MongoDB
+4. Authentication: JWT (JSON Web Tokens)
+5. Project Structure
 - src/app
-
 - core – services, interceptors, and guards
 - features – feature modules including:
 - auth – login, register
