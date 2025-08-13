@@ -40,30 +40,30 @@ ng serve
 Open your browser at http://localhost:4200
 
 ## Technologies
-Frontend: Angular
-Backend: REST API (Node.js / Express)
-Database: MongoDB
-Authentication: JWT (JSON Web Tokens)
-Project Structure
+- Frontend: Angular
+- Backend: REST API (Node.js / Express)
+- Database: MongoDB
+- Authentication: JWT (JSON Web Tokens)
+- Project Structure
 
-src/app
+- src/app
 
-core – services, interceptors, and guards
-features – feature modules including:
-auth – login, register
-home – home page
-posts – post-related components
-profile – user profile components
-themes – themes-related components
-models – TypeScript interfaces for users, themes, and posts
-shared – shared components and pipes used across the app
+- core – services, interceptors, and guards
+- features – feature modules including:
+- auth – login, register
+- home – home page
+- posts – post-related components
+- profile – user profile components
+- themes – themes-related components
+- models – TypeScript interfaces for users, themes, and posts
+- shared – shared components and pipes used across the app
 
 ## Usage
-Navigate to the home page
-Create new theme
-Edit or delete existing themes (only by their author)
-Register a new user and log in
-View and update user profile information
+- Navigate to the home page
+- Create new theme
+- Edit or delete existing themes (only by their author)
+- Register a new user and log in
+- View and update user profile information
 
 ## Author
 Anna Natova
