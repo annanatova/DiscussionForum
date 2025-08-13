@@ -4,40 +4,46 @@ import { Observable } from "rxjs";
 import { Theme } from "../../models";
 
 @Injectable({
-    providedIn: 'root' 
+  providedIn: 'root' 
 })
 export class ThemesService {
-    private apiUrl = 'http://localhost:3000/api';
-    
-    constructor(private httpClient: HttpClient) {}
+  private apiUrl = 'http://localhost:3000/api/themes';
+  
+  constructor(private httpClient: HttpClient) {}
 
-    getThemes(): Observable<Theme[]> {
-        return this.httpClient.get<Theme[]>(`${this.apiUrl}/themes`);
-    }
+  getThemes(): Observable<Theme[]> {
+    return this.httpClient.get<Theme[]>(this.apiUrl);
+  }
 
-    createTheme(themeName: string, postText: string): Observable<Theme> {
-        return this.httpClient.post<Theme>(`${this.apiUrl}/themes`, { themeName, postText }, {
-            withCredentials: true,
-        });
-    }
+  createTheme(themeName: string, postText: string): Observable<Theme> {
+    return this.httpClient.post<Theme>(this.apiUrl, { themeName, postText }, {
+      withCredentials: true,
+    });
+  }
 
-    getThemeById(id: string): Observable<Theme> {
-        return this.httpClient.get<Theme>(`${this.apiUrl}/themes/${id}`);
-    }
+  getThemeById(id: string): Observable<Theme> {
+    return this.httpClient.get<Theme>(`${this.apiUrl}/${id}`);
+  }
 
-    subscribe(themeId: string, userId: string): Observable<void> {
-        return this.httpClient.post<void>(`${this.apiUrl}/themes/${themeId}/subscribe`,{ userId });
-    }
+  subscribe(themeId: string, userId: string): Observable<void> {
+    return this.httpClient.post<void>(`${this.apiUrl}/${themeId}/subscribe`, { userId });
+  }
 
-    unsubscribe(themeId: string, userId: string): Observable<void> {
-        return this.httpClient.post<void>(`${this.apiUrl}/themes/${themeId}/unsubscribe`,{ userId });
-    }
+  unsubscribe(themeId: string, userId: string): Observable<void> {
+    return this.httpClient.post<void>(`${this.apiUrl}/${themeId}/unsubscribe`, { userId });
+  }
 
-    deleteTheme(themeId: string): Observable<any> {
-        return this.httpClient.delete(`${this.apiUrl}/themes/${themeId}`);
-    }
+deleteTheme(themeId: string): Observable<any> {
+  return this.httpClient.delete(
+    `${this.apiUrl}/${themeId}`,
+    { withCredentials: true }
+  );
+}
 
-   updateTheme(themeId: string, data: Partial<{ themeName: string }>): Observable<Theme> {
-  return this.httpClient.patch<Theme>(`${this.apiUrl}/themes/${themeId}`, data);
+updateTheme(themeId: string, themeName: string): Observable<Theme> {
+    return this.httpClient.patch<Theme>(
+        `${this.apiUrl}/${themeId}`,
+        { themeName }
+    );
 }
 }

@@ -1,23 +1,14 @@
-<div class="theme-content">
-
-  <!-- <div style="background: #f8f8f8; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc;">
-  <p><b>Debug info:</b></p>
-  <p>Current user ID: <code>{{ authService.currentUser()?.id }}</code></p>
-  <p>Theme author ID: <code>{{ themeAuthorId }}</code></p>
-  <p>Logged in? <code>{{ authService.isLoggedIn() }}</code></p>
-</div> -->
+<div class="theme-content" *ngIf="theme">
 
   <!-- Theme title and subscription -->
   <section class="theme-header">
     <div class="theme-name-wrapper">
       <div class="theme-name">
-        <!-- Inline редакция: ако не редактираме, показваме заглавието -->
         <ng-container *ngIf="!isEditingTheme; else editForm">
-          <h2>{{ themeTitle }}</h2>
-          <p>Date: <time>{{ themeDate }}</time></p>
+          <h2>{{ theme.themeName }}</h2>
+          <p>Date: <time>{{ theme.created_at | date:'medium' }}</time></p>
         </ng-container>
 
-        <!-- Форма за редакция на заглавието -->
         <ng-template #editForm>
           <input
             type="text"
@@ -30,18 +21,22 @@
           <button (click)="cancelEditTheme()">Cancel</button>
         </ng-template>
       </div>
+
       <div class="subscribers">
-        <p>Subscribers: <span>{{ subscribersCount }}</span></p>
+        <p>Subscribers: <span>{{ theme.subscribers.length }}</span></p>
 
         <ng-container *ngIf="authService.isLoggedIn()">
           <div class="actions-wrapper">
-            <button *ngIf="isSubscribed; else subscribeBtn" class="unsubscribe" (click)="toggleSubscribe()">
+            <button *ngIf="theme.subscribers.includes(currentUserId!); else subscribeBtn" 
+                    class="unsubscribe" 
+                    (click)="toggleSubscribe()">
               Unsubscribe
             </button>
             <ng-template #subscribeBtn>
               <button class="subscribe" (click)="toggleSubscribe()">Subscribe</button>
             </ng-template>
-            <div *ngIf="authService.currentUser()?.id === themeAuthorId && !isEditingTheme" class="edit-delete-buttons">
+
+            <div *ngIf="currentUserId === theme.userId && !isEditingTheme" class="edit-delete-buttons">
               <button (click)="startEditTheme()">Edit Theme</button>
               <button (click)="onDeleteTheme()">Delete Theme</button>
             </div>
@@ -67,20 +62,16 @@
       </div>
       <footer class="comment-footer">
         <ng-container *ngIf="authService.isLoggedIn()">
-          <i
-            class="fas fa-thumbs-up"
-            (click)="likeComment(comment.id)"
-            [class.liked]="comment.liked"
-            style="cursor:pointer"
-            title="Like"
-          ></i>
-          <i
-            class="fas fa-thumbs-down"
-            (click)="dislikeComment(comment.id)"
-            [class.disliked]="comment.disliked"
-            style="cursor:pointer"
-            title="Dislike"
-          ></i>
+          <i class="fas fa-thumbs-up"
+             (click)="likeComment(comment.id)"
+             [class.liked]="comment.liked"
+             style="cursor:pointer"
+             title="Like"></i>
+          <i class="fas fa-thumbs-down"
+             (click)="dislikeComment(comment.id)"
+             [class.disliked]="comment.disliked"
+             style="cursor:pointer"
+             title="Dislike"></i>
         </ng-container>
         <p><span>{{ comment.likes }}</span> likes</p>
       </footer>

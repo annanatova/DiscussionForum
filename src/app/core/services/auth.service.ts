@@ -76,7 +76,7 @@ export class AuthService {
         return this._currentUser()?.id || null;
     }
 
-    update(user: User): Observable<User> {
+        update(user: User): Observable<User> {
         return this.httpClient.put<ApiUser>(`${this.apiUrl}/users/${user.id}`, {
             _id: user.id,
             username: user.username,

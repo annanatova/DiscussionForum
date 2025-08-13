@@ -86,7 +86,7 @@ export class Profile {
     this.profileForm.reset();
   }
 
-  onSave(): void {
+onSave(): void {
     if (this.profileForm.valid) {
       const { username, email, phone } = this.profileForm.value
 

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ThemesService } from '../../../core/services/themes.service';
 import { Comment } from '../../../models/comment';
+import { Theme } from '../../../models/theme.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -21,64 +22,45 @@ export class ThemeContent implements OnInit {
   private cdr = inject(ChangeDetectorRef);
 
   themeId!: string;
-  themeTitle = '';
-  themeDate = '';
-  subscribersCount = 0;
-  isSubscribed = false;
-
+  theme?: Theme;
   comments: Comment[] = [];
-
   newComment = '';
   commentError = false;
 
-  themeAuthorId = '';  // ще пазим id на автора
-
-  // За inline редакция на тема
   isEditingTheme = false;
   editedThemeName = '';
+  currentUserId?: string;
 
   ngOnInit(): void {
+    const user = this.authService.currentUser();
+    this.currentUserId = user?.id;
+
     this.route.params.subscribe(params => {
       this.themeId = params['id'];
 
       this.themesService.getThemeById(this.themeId).subscribe(themeData => {
-        console.log('themeData.userId:', themeData.userId);
-        this.themeTitle = themeData.themeName;
-        this.themeDate = new Date(themeData.created_at).toLocaleString();
-        this.subscribersCount = themeData.subscribers.length;
-
-        this.themeAuthorId = themeData.userId;  // Взимаме id на автора
-        this.editedThemeName = this.themeTitle;
-
-        const currentUser = this.authService.currentUser();
-        this.isSubscribed = currentUser
-          ? themeData.subscribers.includes(currentUser.id)
-          : false;
-
-        this.comments = themeData.comments || [];
-
+        this.theme = themeData;
+        this.editedThemeName = this.theme.themeName;
+        this.comments = this.theme.comments || [];
         this.cdr.detectChanges();
       });
     });
   }
 
   toggleSubscribe(): void {
-    const currentUser = this.authService.currentUser();
-    if (!currentUser) return;
+    if (!this.currentUserId || !this.theme) return;
 
-    if (this.isSubscribed) {
-      this.subscribersCount = Math.max(0, this.subscribersCount - 1);
-      this.isSubscribed = false;
+    const isSubscribed = this.theme.subscribers.includes(this.currentUserId);
+    if (isSubscribed) {
+      this.theme.subscribers = this.theme.subscribers.filter(id => id !== this.currentUserId);
     } else {
-      this.subscribersCount++;
-      this.isSubscribed = true;
+      this.theme.subscribers.push(this.currentUserId);
     }
 
     this.cdr.detectChanges();
-    console.log(`${this.isSubscribed ? 'Subscribed' : 'Unsubscribed'} locally to theme ${this.themeId}`);
   }
 
-  likeComment(commentId: string): void {
+  public likeComment(commentId: string): void {
     const comment = this.comments.find(c => c.id === commentId);
     if (!comment) return;
 
@@ -88,13 +70,11 @@ export class ThemeContent implements OnInit {
     } else {
       comment.likes++;
       comment.liked = true;
-      if (comment.disliked) {
-        comment.disliked = false;
-      }
+      if (comment.disliked) comment.disliked = false;
     }
   }
 
-  dislikeComment(commentId: string): void {
+  public dislikeComment(commentId: string): void {
     const comment = this.comments.find(c => c.id === commentId);
     if (!comment) return;
 
@@ -140,46 +120,51 @@ export class ThemeContent implements OnInit {
     return comment.id;
   }
 
-  // Inline редакция на тема
-
   startEditTheme(): void {
-  this.isEditingTheme = true;
-  this.editedThemeName = this.themeTitle;
-}
-
-cancelEditTheme(): void {
-  this.isEditingTheme = false;
-}
-
-saveTheme(): void {
-  const trimmedName = this.editedThemeName.trim();
-  if (!trimmedName) {
-    alert('Theme name cannot be empty');
-    return;
+    this.isEditingTheme = true;
+    this.editedThemeName = this.theme?.themeName || '';
   }
 
-  this.themesService.updateTheme(this.themeId, { themeName: trimmedName }).subscribe({
-    next: (updatedTheme: any) => {
-      this.themeTitle = updatedTheme.themeName;
-      this.isEditingTheme = false;
-      this.cdr.detectChanges();
-      console.log('Theme updated successfully');
+  cancelEditTheme(): void {
+    this.isEditingTheme = false;
+  }
+
+  saveTheme(): void {
+    if (!this.theme) return;
+
+    const trimmedName = this.editedThemeName.trim();
+    if (!trimmedName) {
+      alert('Theme name cannot be empty');
+      return;
+    }
+
+    this.themesService.updateTheme(this.themeId, trimmedName).subscribe({
+      next: (updatedTheme) => {
+        this.theme!.themeName = updatedTheme.themeName;
+        this.isEditingTheme = false;
+        this.cdr.detectChanges();
+        console.log('Theme updated successfully');
+      },
+      error: (err) => {
+        console.error('Failed to update theme:', err);
+        alert('Failed to update theme. Please try again.');
+      }
+    });
+  }
+onDeleteTheme(): void {
+  if (!this.theme) return;
+  if (!confirm('Are you sure you want to delete this theme?')) return;
+
+  this.themesService.deleteTheme(this.themeId).subscribe({
+    next: (response) => {
+      console.log('Theme deleted successfully:', response);
+      this.router.navigate(['/themes']);
     },
     error: (err) => {
-      console.error('Update failed', err);
-      alert('Failed to update theme. Please try again.');
+      console.error('Error deleting theme:', err);
+      alert('Failed to delete theme. Please try again.');
     }
   });
 }
 
-  // Изтриване на тема
-
-  onDeleteTheme(): void {
-    if (!confirm('Are you sure you want to delete this theme?')) return;
-
-    this.themesService.deleteTheme(this.themeId).subscribe(() => {
-      console.log(`Theme ${this.themeId} deleted`);
-      this.router.navigate(['/themes']);
-    });
-  }
 }
