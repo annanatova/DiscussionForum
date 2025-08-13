@@ -1,59 +1,66 @@
-# MyForum
+# Discussion Forum
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.5.
+## Description
+Discussion Forum is a web application developed with Angular for the frontend and a REST API backend connected to a MongoDB database. The project allows users to create and manage themes and posts, as well as have their own user profile with authentication.
 
-## Development server
+Key features:
+- Home page
+- Create, read, edit and delete themes (CRUD operations)
+- View details of each theme and post
+- User registration and login
+- User profile with the ability to update information
+- Authentication and access protection for certain resources
 
-To start a local development server, run:
+## Installation
 
+### Backend
+1. Clone the backend repository (from the Angular course - Rest-api)
+2. Install dependencies:
 ```bash
+npm install
+
+Start the server:
+npm start
+
+Frontend (Angular)
+Clone the frontend repository
+Install dependencies:
+npm install
+
+Start the Angular application:
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open your browser at http://localhost:4200
 
-## Code scaffolding
+Technologies
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Frontend: Angular
+Backend: REST API (Node.js / Express)
+Database: MongoDB
+Authentication: JWT (JSON Web Tokens)
+Project Structure
 
-```bash
-ng generate component component-name
-```
+src/app
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+core – services, interceptors, and guards
+features – feature modules including:
+auth – login, register
+home – home page
+posts – post-related components
+profile – user profile components
+themes – themes-related components
+models – TypeScript interfaces for users, themes, and posts
+shared – shared components and pipes used across the app
 
-```bash
-ng generate --help
-```
+Usage
+Navigate to the home page
+Create new theme
+Edit or delete existing themes (only by their author)
+Register a new user and log in
+View and update user profile information
 
-## Building
+Author
+Anna Natova
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+License
+This project is intended for educational purposes and personal development.
