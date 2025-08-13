@@ -14,10 +14,9 @@
         </div>
 
         <div class="subscribers">
-          <!-- Details button -->
        <button [routerLink]="['/themes', theme._id]" class="details-btn">Details</button>
 
-          <!-- Subscribe/Unsubscribe buttons only for logged-in users (and not the creator) -->
+<!-- Subscribe/Unsubscribe buttons only for logged-in users (and not the creator) -->
           <ng-container *ngIf="isLoggedIn && theme.userId.id !== currentUserId">
             <button 
               *ngIf="subscribed; else subscribeBtn" 

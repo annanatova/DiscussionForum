@@ -1,12 +1,12 @@
 .theme-content {
   max-width: 900px;
   margin: 3rem auto;
-  background-color: #fde8f0; /* мек розов фон */
+  background-color: #fde8f0;
   padding: 2rem 2.5rem;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(253, 232, 240, 0.6);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #843b5b; /* топло тъмно розово */
+  color: #843b5b;
 }
 
 /* Theme Header */

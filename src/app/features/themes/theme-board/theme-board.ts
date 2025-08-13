@@ -8,7 +8,6 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-theme-board',
-  // standalone: true, 
   imports: [CommonModule, RouterLink, ThemeItem],
   templateUrl: './theme-board.html',
   styleUrls: ['./theme-board.css'] 
