@@ -20,24 +20,24 @@ Key features:
 npm install
 ```
 
-Start the server:
+3. Start the server:
 ```bash
 npm start
 ```
 
-Frontend (Angular)
-Clone the frontend repository
-Install dependencies:
+- Frontend (Angular)
+4. Clone the frontend repository
+5. Install dependencies:
 ```bash
 npm install
 ```
 
-Start the Angular application:
+6. Start the Angular application:
 ```bash
 ng serve
 ```
 
-Open your browser at http://localhost:4200
+7. Open your browser at http://localhost:4200
 
 ## Technologies
 1. Frontend: Angular
